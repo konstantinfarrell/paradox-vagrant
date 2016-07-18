@@ -6,7 +6,7 @@ yum clean all
 # update yum
 yum -y update
 
-# some utils I like to have available
+# good utils
 yum install -y vim wget nc curl emacs words mlocate dos2unix gcc
 
 # epel
@@ -30,6 +30,9 @@ chkconfig ip6tables off
 
 # set the timezone to something reasonable
 ln -sf /usr/share/zoneinfo/US/Pacific /etc/localtime
+
+# install network time
+yum install ntp
 
 # install mariadb
 yum -y install mariadb-server mariadb
@@ -144,11 +147,13 @@ systemctl restart httpd.service
 # prepare for postgres
 sed -i -E 's#(\[(base|updates)\])#\1\nexclude=postgresql*#g'  /etc/yum.repos.d/CentOS-Base.repo
 yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+
 # install postgres94 with postgis
 yum install -y postgresql94 postgresql94-server postgresql94-libs postgresql94-contrib postgresql94-devel postgis2_94
 service postgresql-9.4 initdb
 service postgresql-9.4 start
 chkconfig postgresql-9.4 on
+
 # create a root user
 su -c "psql -c \"CREATE ROLE root WITH PASSWORD 'vagrant' SUPERUSER LOGIN;\"" postgres
 # allow md5 auth
