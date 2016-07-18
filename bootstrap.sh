@@ -150,7 +150,7 @@ yum -y localinstall http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-cent
 
 # install postgres94 with postgis
 yum install -y postgresql94 postgresql94-server postgresql94-libs postgresql94-contrib postgresql94-devel postgis2_94
-service postgresql-9.4 initdb
+/usr/pgsql-9.4/bin/postgresql94-setup initdb
 service postgresql-9.4 start
 chkconfig postgresql-9.4 on
 
