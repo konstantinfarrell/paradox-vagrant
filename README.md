@@ -11,4 +11,8 @@ With Vagrant and Virtualbox installed
 
 Then ssh into it at 10.0.0.10
 
+## Run
 
+After installing it just run
+
+    vagrant up
